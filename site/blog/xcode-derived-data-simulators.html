@@ -40,12 +40,12 @@
 <p>Xcode is the most reliable way to lose 40 GB without noticing. It writes to four locations, two in your home folder and two at the system level, and none of them are pruned automatically.</p>
 
 <h2>The four paths, and what each one costs you</h2>
-<table><thead><tr><th>Path</th><th>What it holds</th><th>Tier</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Path</th><th>What it holds</th><th>Tier</th></tr></thead><tbody>
 <tr><td><code>~/Library/Developer/Xcode/DerivedData</code></td><td>Build products, indexes, module caches</td><td>Regenerable</td></tr>
 <tr><td><code>~/Library/Developer/CoreSimulator/Devices</code></td><td>Each simulated device and its installed apps</td><td>Regenerable</td></tr>
 <tr><td><code>/Library/Developer/CoreSimulator/Caches</code></td><td>Shared simulator caches</td><td>Needs admin</td></tr>
 <tr><td><code>/Library/Developer/CoreSimulator/Profiles/Runtimes</code></td><td>Installed iOS/watchOS/tvOS runtimes</td><td>Needs admin</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>The first two are yours and delete without a password. The second two sit under <code>/Library</code> and macOS will ask for an administrator prompt.</p>
 
 <h2>The orphaned case worth checking</h2>

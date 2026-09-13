@@ -42,22 +42,22 @@
 
 <h2>The three tiers</h2>
 <p>Every item found is classified before it is ever shown to you, and the classification drives how much friction stands between it and deletion.</p>
-<table><thead><tr><th>Tier</th><th>Definition</th><th>How it is handled</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Tier</th><th>Definition</th><th>How it is handled</th></tr></thead><tbody>
 <tr><td><strong>Regenerable</strong></td><td>Rebuilds itself the next time it is needed</td><td>Eligible for one-click cleaning</td></tr>
 <tr><td><strong>Needs admin</strong></td><td>Safe to remove, but macOS will ask for your password</td><td>Batched into a single administrator prompt</td></tr>
-<tr><td><strong>Permanent</strong></td><td>Nothing rebuilds it</td><td>Never bulk-selected. Each item confirmed on its own, then moved to the Trash rather than deleted — unless it is already in the Trash, where emptying really does delete it, and the confirmation says so</td></tr>
-</tbody></table>
+<tr><td><strong>Permanent</strong></td><td>Nothing rebuilds it</td><td>Never bulk-selected. Each item confirmed on its own, then moved to the Trash rather than deleted</td></tr>
+</tbody></table></div>
 <p>Quick clean touches the first tier only. It will never include something needing your judgement, which is what makes it safe to press without reading.</p>
 
 <h2>Locations it will never delete</h2>
 <p>These paths are refused at the point of execution. Even if an item somehow reached a clean list, the deletion is rejected:</p>
-<table><thead><tr><th>Location</th><th>Why</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Location</th><th>Why</th></tr></thead><tbody>
 <tr><td><code>~/Dropbox</code></td><td>A local delete propagates to every device and to anyone sharing the folder</td></tr>
 <tr><td><code>~/Library/Mobile Documents</code> (iCloud Drive)</td><td>Same — removing a synced file removes it everywhere</td></tr>
 <tr><td><code>~/Library/CloudStorage</code> (OneDrive, Google Drive, Box)</td><td>Same, for every other sync provider</td></tr>
 <tr><td>Any <code>.git</code> directory</td><td>History has no rebuild path. Only <code>git gc</code> is ever offered</td></tr>
 <tr><td>Docker named volumes</td><td>Databases and application state live here, not disposable layers</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h2>Rules that go further than the list</h2>
 <p><strong>Docker is pruned, never wiped.</strong> The command is <code>docker system prune -a</code>, which removes unused images and stopped containers. The <code>--volumes</code> flag is never passed under any circumstance.</p>

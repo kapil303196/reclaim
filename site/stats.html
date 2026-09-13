@@ -24,7 +24,8 @@
           display:block;min-height:2px}
   .bars i:hover{opacity:1;background:var(--amber)}
   .axis{display:flex;justify-content:space-between;color:var(--ink3);font-size:12px;margin-top:8px}
-  .vtable{width:100%;border-collapse:collapse;margin:8px 0 28px;font-size:14px}
+  .tscroll{overflow-x:auto;margin:8px 0 28px;-webkit-overflow-scrolling:touch}
+  .vtable{width:100%;border-collapse:collapse;margin:0;font-size:14px}
   .vtable th,.vtable td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
   .vtable td:last-child,.vtable th:last-child{text-align:right;font-variant-numeric:tabular-nums}
   .note{color:var(--ink3);font-size:13px}
@@ -58,7 +59,7 @@
 
 <section id="versionWrap" hidden>
   <h2>Which version people are on</h2>
-  <table class="vtable"><thead><tr><th>Version</th><th>Installs</th></tr></thead><tbody id="versions"></tbody></table>
+  <div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table class="vtable"><thead><tr><th>Version</th><th>Installs</th></tr></thead><tbody id="versions"></tbody></table></div>
   <p class="note">An install moves between rows when it updates, so this counts Macs rather than reports, and the rows always add up to the install count above. “unknown” is a build whose version string the counter could not parse.</p>
 </section>
 

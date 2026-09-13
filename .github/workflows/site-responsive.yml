@@ -1,0 +1,39 @@
+name: Site responsive
+
+# A page that scrolls sideways on a phone is obvious to every visitor and
+# invisible to whoever built it on a laptop. This is the machine that notices.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'tools/responsive-tests/**'
+      - '.github/workflows/site-responsive.yml'
+  pull_request:
+    paths:
+      - 'site/**'
+      - 'tools/responsive-tests/**'
+      - '.github/workflows/site-responsive.yml'
+  workflow_dispatch:
+
+# Runs branch content in a browser and needs nothing but a checkout.
+permissions:
+  contents: read
+
+jobs:
+  widths:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install Playwright and Chromium
+        run: |
+          npm install --no-save --no-audit --no-fund playwright
+          npx playwright install --with-deps chromium
+
+      - name: Check every page at phone and tablet widths
+        run: ./tools/responsive-tests/run.sh

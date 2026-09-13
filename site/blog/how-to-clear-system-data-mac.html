@@ -77,13 +77,13 @@ ollama list</code></pre>
 <p>Forgotten screen recordings, video editing scratch caches and virtual machine disks all show up here.</p>
 
 <h2>Things you must never delete</h2>
-<table><thead><tr><th>Do not touch</th><th>Why</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Do not touch</th><th>Why</th></tr></thead><tbody>
 <tr><td><code>.git</code> directories</td><td>May be the only copy of a project's history</td></tr>
 <tr><td>Anything in Dropbox, iCloud Drive, OneDrive</td><td>A local delete syncs to every device</td></tr>
 <tr><td>Docker volumes</td><td>Contain database data, not cache</td></tr>
 <tr><td><code>com.apple.*</code> containers</td><td>System components</td></tr>
 <tr><td>Your MySQL or Postgres data directory</td><td>Contains actual databases</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h3>The .git trap specifically</h3>
 <p>A repository with a remote configured <em>looks</em> backed up. It is not, until something has actually been pushed. Verify before assuming:</p>

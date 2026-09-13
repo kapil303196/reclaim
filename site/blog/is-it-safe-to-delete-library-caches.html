@@ -48,20 +48,20 @@
 <pre><code>du -sh ~/Library/Caches
 du -sh ~/Library/Application\ Support ~/Library/Containers ~/Library/Group\ Containers</code></pre>
 <p>On most Macs the first number is a few gigabytes at most. The second command routinely returns numbers an order of magnitude larger. Those folders are neighbours in the same directory, which is exactly why the advice spreads — they look interchangeable and are not.</p>
-<table><thead><tr><th>Folder</th><th>What it really holds</th><th>Safe to bulk delete?</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Folder</th><th>What it really holds</th><th>Safe to bulk delete?</th></tr></thead><tbody>
 <tr><td><code>~/Library/Caches</code></td><td>Rebuildable working data</td><td>Yes</td></tr>
 <tr><td><code>~/Library/Application Support</code></td><td>App databases, settings, libraries</td><td>No</td></tr>
 <tr><td><code>~/Library/Containers</code></td><td>Sandboxed app data, mail downloads</td><td>No</td></tr>
 <tr><td><code>~/Library/Group Containers</code></td><td>Messaging media and shared app data</td><td>No</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h2>The three-tier way to think about it</h2>
 <p>Rather than reasoning per folder, it is more reliable to reason per item, by what it costs you if you are wrong. Dustloft sorts everything it finds into exactly three tiers:</p>
-<table><thead><tr><th>Tier</th><th>Meaning</th><th>Handling</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Tier</th><th>Meaning</th><th>Handling</th></tr></thead><tbody>
 <tr><td><strong>Regenerable</strong></td><td>Rebuilds itself the next time it is needed</td><td>Safe to select in bulk</td></tr>
 <tr><td><strong>Needs admin</strong></td><td>Safe to remove, but macOS asks for your password</td><td>Batched into one prompt</td></tr>
 <tr><td><strong>Permanent</strong></td><td>Cannot be recovered</td><td>Never bulk-selected; each item confirmed individually</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>The useful property is that the tier travels with the item, not the folder. A cache inside <code>Application Support</code> is still regenerable; a message database inside it is not.</p>
 
 <h2>Caches that are actually large</h2>
