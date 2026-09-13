@@ -57,12 +57,12 @@ du -sh .git</code></pre>
 <p>This is the check that produced Dustloft. A repository with a GitHub remote configured looked obviously safe to delete during a manual cleanup. Nothing had ever been pushed. That near-miss is why the app runs <code>ls-remote</code> against every repository it finds, counts the refs, and marks a repository <em>only copy — nothing pushed</em> in red when the count is zero.</p>
 
 <h2>Before deleting any project folder</h2>
-<table><thead><tr><th>Check</th><th>Command</th><th>Wrong answer means</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>Check</th><th>Command</th><th>Wrong answer means</th></tr></thead><tbody>
 <tr><td>Does the history exist remotely?</td><td><code>git ls-remote origin</code></td><td>No refs — this is the only copy</td></tr>
 <tr><td>Is anything uncommitted?</td><td><code>git status --porcelain</code></td><td>Output — unsaved work</td></tr>
 <tr><td>Are there unpushed commits?</td><td><code>git log --branches --not --remotes</code></td><td>Output — local-only commits</td></tr>
 <tr><td>Any stashes?</td><td><code>git stash list</code></td><td>Output — stashes are not pushed</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h2>Shrink the project, keep the history</h2>
 <p>Most of a project folder's size is usually not the repository at all. <a href="/blog/node-modules-taking-up-space-mac">Dependencies and build output</a> are typically far larger than <code>.git</code>, fully regenerable, and the right thing to remove first. On an Apple-platform project, <a href="/blog/xcode-derived-data-simulators">DerivedData</a> belongs on that same list.</p>

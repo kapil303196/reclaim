@@ -109,7 +109,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);
   font-family:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  font-size:clamp(1rem,.62rem + 1.5vw,1.3rem);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  font-size:clamp(1rem,.62rem + 1.5vw,1.3rem);line-height:1.62;-webkit-font-smoothing:antialiased}
 .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(1.2rem,4vw,2.5rem)}
 a{color:inherit}
 h1,h2,h3{line-height:1.04;letter-spacing:-.028em;text-wrap:balance;margin:0}
@@ -172,16 +172,16 @@ h1 .hide{color:var(--amber)}
 .legend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:.45rem;vertical-align:middle}
 .legend b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
 
-.stats{display:grid;gap:1px;margin-top:clamp(2.5rem,6vw,4rem);background:var(--line);
+.stats{display:grid;grid-template-columns:minmax(0,1fr);gap:1px;margin-top:clamp(2.5rem,6vw,4rem);background:var(--line);
   border:1px solid var(--line);border-radius:15px;overflow:hidden}
-@media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:720px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .stat{background:var(--bg);padding:1.6rem 1.4rem}
 .stat b{display:block;font-size:clamp(1.9rem,1.3rem + 2.3vw,3rem);font-weight:800;color:var(--amber);
   letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1}
 .stat span{display:block;margin-top:.5rem;color:var(--ink2);font-size:.9rem;line-height:1.45}
 
 section{padding:clamp(3.2rem,8vw,6rem) 0;border-top:1px solid var(--line)}
-.two{display:grid;gap:clamp(1.6rem,5vw,3.8rem);grid-template-columns:1fr}
+.two{display:grid;gap:clamp(1.6rem,5vw,3.8rem);grid-template-columns:minmax(0,1fr)}
 @media(min-width:900px){.two{grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);align-items:start}}
 .sec-lede{color:var(--ink2);margin:1rem 0 0;max-width:46ch}
 
@@ -221,8 +221,8 @@ section{padding:clamp(3.2rem,8vw,6rem) 0;border-top:1px solid var(--line)}
 .row:hover .rspan{filter:brightness(1.12)}
 .chartnote{margin:1.3rem 0 0;font-size:.82rem;color:var(--ink3);max-width:60ch}
 
-.cost{display:grid;gap:1rem;margin-top:2rem}
-@media(min-width:760px){.cost{grid-template-columns:1fr 1fr}}
+.cost{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;margin-top:2rem}
+@media(min-width:760px){.cost{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .opt{padding:1.5rem;border:1px solid var(--line);border-radius:14px;background:var(--bg2)}
 .opt.good{border-color:var(--amber2)}
 .opt h3{margin-bottom:.4rem}
@@ -231,8 +231,8 @@ section{padding:clamp(3.2rem,8vw,6rem) 0;border-top:1px solid var(--line)}
 .opt.good .price{color:var(--amber)}
 .opt p{margin:0;font-size:.9rem;color:var(--ink2);line-height:1.5}
 
-.tiers{display:grid;gap:1rem;margin-top:1.8rem}
-@media(min-width:760px){.tiers{grid-template-columns:repeat(3,1fr)}}
+.tiers{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem;margin-top:1.8rem}
+@media(min-width:760px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .tier{padding:1.25rem;border:1px solid var(--line);border-radius:13px;background:var(--bg2)}
 .tier h3{font-size:1rem;margin-bottom:.4rem}
 .tier p{margin:0;font-size:.88rem;color:var(--ink2);line-height:1.55}
@@ -307,7 +307,12 @@ figcaption{margin-top:.85rem;font-size:.84rem;color:var(--ink3)}
 
 footer{padding:2.8rem 0 4rem;border-top:1px solid var(--line);color:var(--ink3);font-size:.86rem}
 .foot{display:flex;flex-wrap:wrap;gap:1.1rem;align-items:center}
-.foot nav{margin-left:auto;display:flex;gap:1.3rem}
+/* Five links in a row do not fit a phone, and the row itself has to be allowed
+   to break — wrapping the outer .foot only moves the whole block, not its
+   contents. On a narrow screen the nav takes its own full-width line. */
+.foot nav{margin-left:auto;display:flex;flex-wrap:wrap;gap:.4rem 1.3rem}
+.foot nav a{padding-block:.35rem}
+@media(max-width:34rem){.foot nav{margin-left:0;width:100%}}
 footer a{color:var(--ink2)}
 
 /* The ledger IS the chart: each row carries a bar sized to its value, which

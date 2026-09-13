@@ -41,11 +41,11 @@
 
 <h2>Why you have never seen it</h2>
 <p>It lives in <code>~/Library/Group Containers/</code>, a location Finder hides by default and macOS Storage settings roll silently into <em>System Data</em>. There is no in-app setting that prunes it, no age limit, and no warning. Every photo, video, voice note and forwarded meme you have received since installing the app is still on the disk.</p>
-<table><thead><tr><th>App</th><th>Where its media lives</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>App</th><th>Where its media lives</th></tr></thead><tbody>
 <tr><td>WhatsApp</td><td><code>~/Library/Group Containers/group.net.whatsapp.WhatsApp.shared/Message/Media</code></td></tr>
 <tr><td>Messages</td><td><code>~/Library/Messages/Attachments</code></td></tr>
 <tr><td>Mail downloads</td><td><code>~/Library/Containers/com.apple.mail/Data/Library/Mail Downloads</code></td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>To look for yourself, without deleting anything:</p>
 <pre><code>du -sh ~/Library/Group\ Containers/* 2>/dev/null | sort -rh | head</code></pre>
 <p>That ranks the containers. To find the individual videos inside the largest one, the <a href="/blog/find-large-files-mac-terminal">Spotlight query for files over 1 GB</a> is faster than walking the folder by hand.</p>

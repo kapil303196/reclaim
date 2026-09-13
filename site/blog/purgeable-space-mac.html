@@ -42,12 +42,12 @@
 <h2>What purgeable space actually is</h2>
 <p>Purgeable is not a folder and not a category. It is a promise. macOS marks certain files as things it is willing to destroy or re-download the moment a write needs the room, then counts them as available even though they are still occupying blocks on the disk.</p>
 <p>Typically that promise covers:</p>
-<table><thead><tr><th>What macOS marks purgeable</th><th>Why it can let go of it</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>What macOS marks purgeable</th><th>Why it can let go of it</th></tr></thead><tbody>
 <tr><td>Time Machine local snapshots</td><td>Point-in-time copies kept on the internal disk; the real backup lives on your external drive</td></tr>
 <tr><td>iCloud Drive files already uploaded</td><td>The copy in the cloud is authoritative, so the local one can be evicted</td></tr>
 <tr><td>Photos originals with iCloud Photos on</td><td>Full-resolution versions can be fetched again on demand</td></tr>
 <tr><td>Some system and font caches</td><td>Rebuilt automatically the next time they are needed</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h2>Why no cleaner can free it for you</h2>
 <p>The release is a decision macOS makes, not an operation it exposes. There is no supported call an application can make that means "purge now". A tool that claims to free purgeable space is either waiting for the system to act and taking the credit, or deleting something else and attributing the change to purgeable.</p>

@@ -52,12 +52,12 @@
 <p>The same applies to <code>site-packages</code> and <code>vendor</code>. Any sweep that matches directory names alone will eventually hit one of these. Dustloft's build-output scan explicitly skips anything inside <code>node_modules</code>, <code>.venv</code>, <code>site-packages</code> or <code>vendor</code> for exactly this reason, and its project scans only ever run inside project roots you have configured — never across <code>$HOME</code> or <code>/</code>.</p>
 
 <h2>What regenerates, and at what cost</h2>
-<table><thead><tr><th>What</th><th>Restored by</th><th>Real cost</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>What</th><th>Restored by</th><th>Real cost</th></tr></thead><tbody>
 <tr><td><code>node_modules</code></td><td><code>npm i</code> / <code>pnpm i</code> / <code>yarn</code></td><td>Network and time; lockfile keeps versions identical</td></tr>
 <tr><td><code>.next</code>, <code>dist</code>, <code>build</code> (your project)</td><td>Next build</td><td>One slower build</td></tr>
 <tr><td><code>.venv</code>, <code>venv</code></td><td><code>pip install -r</code></td><td>Network and time</td></tr>
 <tr><td>Package manager caches</td><td>Next install</td><td>Re-download once</td></tr>
-</tbody></table>
+</tbody></table></div>
 
 <h2>Package caches are separate</h2>
 <p>Deleting <code>node_modules</code> does not touch the package manager's own cache. Those live outside your projects — <code>~/.npm/_cacache</code>, <code>~/Library/Caches/pnpm</code>, <code>~/.yarn/cache</code>, <code>~/.bun/install/cache</code>, <code>~/.cargo/registry/cache</code>, <code>~/.m2/repository</code>, <code>~/.gradle/caches</code> — and they persist across every project. They are regenerable too, at the price of re-downloading on the next install.</p>

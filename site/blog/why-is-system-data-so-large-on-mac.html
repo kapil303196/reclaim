@@ -41,7 +41,7 @@
 
 <h2>What is actually inside System Data</h2>
 <p>On a 512 GB MacBook Pro that reported 96% full, the breakdown looked like this. None of it was visible in Finder without deliberately hunting for it.</p>
-<table><thead><tr><th>What it was</th><th>Where it lived</th><th>Size</th></tr></thead><tbody>
+<div class="tscroll" tabindex="0" role="region" aria-label="Table, scrolls sideways"><table><thead><tr><th>What it was</th><th>Where it lived</th><th>Size</th></tr></thead><tbody>
 <tr><td><a href="/blog/whatsapp-messages-media-mac">Messaging app media</a></td><td><code>~/Library/Group Containers/</code></td><td>92 GB</td></tr>
 <tr><td>Dependency folders</td><td><code>node_modules</code> across projects</td><td>46 GB</td></tr>
 <tr><td>Build output</td><td>42 stale <code>.next</code> caches</td><td>20 GB</td></tr>
@@ -50,7 +50,7 @@
 <tr><td>Orphaned Xcode runtimes</td><td><code>/Library/Developer/CoreSimulator</code></td><td>13 GB</td></tr>
 <tr><td>Developer caches</td><td><code>~/.cache</code></td><td>10 GB</td></tr>
 <tr><td>Trash</td><td><code>~/.Trash</code></td><td>9.3 GB</td></tr>
-</tbody></table>
+</tbody></table></div>
 <p>That is 220 GB of “System Data” that was, in reality, eight identifiable things.</p>
 
 <h2>Why it keeps growing</h2>

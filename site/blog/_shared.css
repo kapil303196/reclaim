@@ -11,6 +11,17 @@
   --ink:oklch(.955 .010 82);--ink2:oklch(.745 .018 78);--ink3:oklch(.605 .018 74);
   --amber:oklch(.815 .145 72);--amber2:oklch(.70 .14 58)}
 *{box-sizing:border-box}
+/* Nothing may be wider than the screen it is read on. Media is capped, prose
+   breaks rather than pushing the page sideways, and a path or URL — which has
+   no spaces to break at and is the usual reason a page scrolls horizontally —
+   is allowed to break anywhere it must. */
+img,svg,video,iframe{max-width:100%;height:auto}
+p,li,dd,dt,th,td,blockquote,figcaption{overflow-wrap:break-word}
+/* A path or URL in running prose has no spaces to break at, so it is allowed
+   to break anywhere rather than push the page sideways. Inside a table it is
+   the opposite — see .tscroll, where the panel scrolls and the path stays
+   whole, because a path broken across three lines is not readable. */
+p code,li code,dd code{overflow-wrap:anywhere}
 :focus-visible{outline:2px solid var(--amber);outline-offset:2px;border-radius:3px}
 .skip{position:absolute;left:-9999px;top:0;z-index:10;background:var(--amber);
   color:oklch(.19 .03 62);padding:.7rem 1.15rem;border-radius:0 0 10px 0;
@@ -22,11 +33,20 @@ body{margin:0;background:var(--bg);color:var(--ink);
 .wrap{max-width:44rem;margin-inline:auto;padding-inline:clamp(1.2rem,4vw,2rem)}
 a{color:var(--amber)}
 header{padding:1.4rem 0;border-bottom:1px solid var(--line)}
-header .wrap{max-width:70rem;display:flex;align-items:center;gap:1rem}
+/* Wraps rather than overflows: brand and four links do not fit side by side on
+   a narrow phone, and the nav dropping to its own line is the only outcome
+   that is not a horizontal scrollbar. */
+header .wrap{max-width:70rem;display:flex;align-items:center;gap:.5rem 1rem;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:.6rem;font-weight:600;text-decoration:none;color:var(--ink)}
 .brand img{width:27px;height:27px;border-radius:7px}
-header nav{margin-left:auto;display:flex;gap:1.3rem;font-size:.9rem}
-header nav a{color:var(--ink2);text-decoration:none}
+header nav{margin-left:auto;display:flex;flex-wrap:wrap;gap:.4rem 1.3rem;font-size:.9rem}
+/* A touch target is not a text baseline. The padding is vertical only, so the
+   row keeps its spacing on a pointer device and gains a thumb's worth of
+   height on a phone. */
+header nav a{color:var(--ink2);text-decoration:none;padding-block:.35rem}
+@media(max-width:30rem){
+  header nav{margin-left:0;width:100%;gap:.4rem 1.1rem}
+}
 header nav a:hover{color:var(--amber)}
 article{padding:clamp(2.5rem,7vw,4.5rem) 0 4rem}
 h1{font-size:clamp(2rem,1.3rem + 2.6vw,3.1rem);font-weight:800;letter-spacing:-.028em;
@@ -48,10 +68,49 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem}
 p code,li code,td code{background:var(--bg2);border:1px solid var(--line);border-radius:5px;
   padding:.1rem .35rem;font-size:.83rem;color:var(--ink)}
 pre code{color:var(--ink2)}
+/* Tables carry file paths and commands, which have no natural break points, so
+   a narrow screen cannot always be given one that fits. Each is wrapped in a
+   .tscroll that scrolls on its own rather than taking the page with it. */
+.tscroll{overflow-x:auto;margin:0 0 1.6rem;-webkit-overflow-scrolling:touch;
+  border:1px solid var(--line);border-radius:11px;background-color:var(--bg2);
+  /* A column hidden off the right edge with nothing to say so reads as broken
+     rather than as scrollable. These four layers are the standard shadow
+     trick: two covers pinned to the content (background-attachment:local) and
+     two shadows pinned to the box, so a shadow is only visible on a side there
+     is actually more table to reach. No script, and nothing to see at all when
+     the table already fits. */
+  background-image:
+    linear-gradient(to right,var(--bg2),var(--bg2)),
+    linear-gradient(to left,var(--bg2),var(--bg2)),
+    linear-gradient(to right,oklch(0 0 0/.38),oklch(0 0 0/0)),
+    linear-gradient(to left,oklch(0 0 0/.38),oklch(0 0 0/0));
+  background-position:left center,right center,left center,right center;
+  background-repeat:no-repeat;
+  background-size:22px 100%,22px 100%,16px 100%,16px 100%;
+  background-attachment:local,local,scroll,scroll}
+.tscroll table{margin-bottom:0;font-size:.9rem}
+/* Headings and code stay on one line; prose still wraps. The table therefore
+   grows only as wide as its genuinely unbreakable content, and the panel — not
+   the page — carries that width. */
+.tscroll th{white-space:nowrap}
+.tscroll code{white-space:pre;overflow-wrap:normal}
+/* A floor, so three prose columns on a phone become a readable panel that
+   scrolls rather than three ribbons of one word per line. Only a floor: a
+   table that already fits still fits, and gains no scrollbar. */
+.tscroll td{min-width:17ch}
+.tscroll tr:last-child th,.tscroll tr:last-child td{border-bottom:0}
+.tscroll:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
 table{width:100%;border-collapse:collapse;margin:0 0 1.6rem;font-size:.94rem}
 th,td{text-align:left;padding:.6rem .7rem;border-bottom:1px solid var(--line);color:var(--ink2)}
 th{color:var(--ink);font-weight:600;font-size:.86rem}
 td:last-child,th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+/* Right alignment suits the numeric last column these tables usually have. In
+   a panel narrow enough to scroll it suits nothing: the column arrives clipped
+   at the left edge of its own text, which reads as damage rather than as more
+   to scroll to. */
+@media(max-width:48rem){
+  .tscroll td:last-child,.tscroll th:last-child{text-align:left}
+}
 blockquote{margin:0 0 1.5rem;padding:1rem 1.2rem;background:var(--bg2);border:1px solid var(--line);border-radius:11px}
 blockquote p:last-child{margin:0}
 .cta{margin:3rem 0 0;padding:1.6rem;border:1px solid var(--amber2);border-radius:14px;background:var(--bg2)}
@@ -61,6 +120,7 @@ blockquote p:last-child{margin:0}
 .cta a.btn{display:inline-block;background:var(--amber);color:oklch(.19 .03 62);padding:.7rem 1.15rem;
   border-radius:10px;text-decoration:none;font-weight:600;font-size:.95rem}
 footer{padding:2.5rem 0 3.5rem;border-top:1px solid var(--line);color:var(--ink3);font-size:.85rem}
+footer a{padding-block:.3rem;display:inline-block}
 footer a{color:var(--ink2)}
 .posts{list-style:none;padding:0;margin:2rem 0 0}
 .posts li{border-bottom:1px solid var(--line);padding:1.3rem 0}
